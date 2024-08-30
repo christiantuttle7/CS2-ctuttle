@@ -21,12 +21,13 @@ Should create structs and populate the array
 void initCells(Cell* board[][10], int boardSize)
 {
     for(int i = 0; i < boardSize; i++){
-        for(int j = 0; j < boardSize; j++){
-                board[i][j] = new Cell
+        for(int j = 0; j < boardSize; j++)
+        {
+                board[i][j] = new Cell;
         }
     }
 
-
+    /*
     Cell** board = new Cell*[boardSize];
  
     for (int i = 0; i < boardSize; i++) {
@@ -34,6 +35,8 @@ void initCells(Cell* board[][10], int boardSize)
         
         board[i] = new Cell[boardSize];
     }
+
+    */
 
 }
 
@@ -55,8 +58,8 @@ void readBoard(Cell* board[][10], int boardSize)
     for(int i = 0; i < boardSize; i++){
         for(int j = 0; j < boardSize; j++){
             boardFile >> board[i][j]->state;
-            board[i][j]->x = i;
-            board[i][j]->y = j;
+            board[i][j]->x = i+1;
+            board[i][j]->y = j+1;
         }
     }
     
@@ -83,15 +86,63 @@ Must use the x, y position stored with each cell to determine which neighbors th
 void findNumNeighbors(Cell* board[][10], int boardSize, Cell* curCell) 
 {
 
-    for(int i = 0; i < boardSize; i++){
-        for(int j = 0; j < boardSize; j++){
-            if(board[i-1][j-1]->state == 1){
-                board[i][j]->numLiveNeighbors += 1;
-            }
-            if(board[i-1])
-
+    //checks cell to the left of current cell
+    if(curCell->x != 1){
         
+        if(board[curCell->x-2][curCell->y-1]->state == 1){
+            curCell->numLiveNeighbors += 1;
+        }
     }
+
+    //checks the cell to the upper left of current cell
+    if(curCell->x != 1 && curCell->y != 1){
+        if(board[curCell->x-2][curCell->y-2]->state == 1){
+            curCell->numLiveNeighbors += 1;
+        }
+    }
+
+    //checks the cell to the lower right of the current cell
+    if(curCell->x != 1 && curCell->y != 10){
+        if(board[curCell->x-2][curCell->y]->state == 1){
+            curCell->numLiveNeighbors += 1;
+        }
+    }
+
+    //checks the cell above the current cell
+    if(curCell->y != 1){
+        if(board[curCell->x-1][curCell->y-2]->state == 1){
+            curCell->numLiveNeighbors += 1;
+        }
+    }
+
+    //checks the cell to the upper right of the current cell
+    if(curCell->x != 10 && curCell->y != 1){
+        if(board[curCell->x][curCell->y-2]->state == 1){
+            curCell->numLiveNeighbors += 1;
+        }
+    }
+
+    //checks the cell to the right of the current cell
+    if(curCell->x != 10){
+        if(board[curCell->x][curCell->y-1]->state == 1){
+            curCell->numLiveNeighbors += 1;
+        }
+    }
+
+    //checks the cell to the lower right of the current cell
+    if(curCell->x != 10 && curCell->y != 10){
+        if(board[curCell->x-1][curCell->y-2]->state == 1){
+            curCell->numLiveNeighbors += 1;
+        }
+    }
+
+    //checks the cell below the current cell
+    if(curCell->y != 10){
+        if(board[curCell->x-1][curCell->y]->state == 1){
+            curCell->numLiveNeighbors += 1;
+        }
+    }
+
 }
 
 /*
@@ -107,5 +158,31 @@ Return if you updated cells or not to break out of while loop from main.
 */
 bool updateCellState(Cell* board[][10], int boardSize) 
 {
+    //finds out how many live neighbors there are for each cell
+    for(int i = 0; i < boardSize; i++){
+        for(int j = 0; j < boardSize; j++){
+            findNumNeighbors(board, boardSize, board[i][j]);
+        }
+    }
+
+    for(int k = 0; k < boardSize; k++){
+        for(int p = 0; p < boardSize; p++){
+
+            //checking if cell is dead (and whether or not it gets to come back to life)
+            if(board[k][p]->state == 0){
+                if(board[k][p]->numLiveNeighbors == 3){
+                    board[k][p]->state == 1; 
+                }
+            }
+
+            //checking if cell is alive (and whether or not it will live on)
+            if(board[k][p]->state == 1){
+                if(board[k][p]->numLiveNeighbors < 2 || board[k][p]->numLiveNeighbors > 3){
+                    board[k][p]->state == 0; 
+                }
+            }
+        }
+    }
+
     return false;
 }
