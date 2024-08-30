@@ -49,12 +49,21 @@ Structure of file should consist of 10 lines of 0 or 1 to indicate cell state
 */
 void readBoard(Cell* board[][10], int boardSize) 
 {
+    /*
     string boardFileName;
     cout << "What is the name of the board file you would like to pick?";
     cin >> boardFileName;
     ifstream boardFile;
-    
-    boardFile.open(boardFileName);
+
+    */
+    ifstream boardFile;
+    boardFile.open("board1.txt");
+
+    if (!boardFile) {
+        cout << "Error opening file: " << "Board text" << endl;
+        return;
+    }
+ 
     for(int i = 0; i < boardSize; i++){
         for(int j = 0; j < boardSize; j++){
             boardFile >> board[i][j]->state;
@@ -171,14 +180,14 @@ bool updateCellState(Cell* board[][10], int boardSize)
             //checking if cell is dead (and whether or not it gets to come back to life)
             if(board[k][p]->state == 0){
                 if(board[k][p]->numLiveNeighbors == 3){
-                    board[k][p]->state == 1; 
+                    board[k][p]->state = 1; 
                 }
             }
 
             //checking if cell is alive (and whether or not it will live on)
             if(board[k][p]->state == 1){
                 if(board[k][p]->numLiveNeighbors < 2 || board[k][p]->numLiveNeighbors > 3){
-                    board[k][p]->state == 0; 
+                    board[k][p]->state = 0; 
                 }
             }
         }
