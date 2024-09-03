@@ -38,15 +38,17 @@ Structure of file should consist of 10 lines of 0 or 1 to indicate cell state
 void readBoard(Cell* board[][10], int boardSize) 
 {
     char filler;
+    string nameOfBoard;
+
+    //ask the user for the name of the board file
+    cout << "What board file do you want to read from (ex: board1.txt): ";
+    cin >> nameOfBoard;
+
     
     ifstream boardFile;
-    boardFile.open("board1.txt");
+    boardFile.open(nameOfBoard);
 
-    if (!boardFile) {
-        cout << "Error opening file: " << "Board text" << endl;
-        return;
-    }
- 
+    
     for(int i = 0; i < boardSize; i++){
         for(int j = 0; j < boardSize; j++){
             boardFile >> filler;
@@ -81,8 +83,8 @@ Must use the x, y position stored with each cell to determine which neighbors th
 */
 void findNumNeighbors(Cell* board[][10], int boardSize, Cell* curCell) 
 {
-
-    //checks cell to the left of current cell
+    
+   //checks cell to the left of current cell
     if(curCell->x != 1){
         
         if(board[curCell->x-2][curCell->y-1]->state == 1){
@@ -90,55 +92,57 @@ void findNumNeighbors(Cell* board[][10], int boardSize, Cell* curCell)
         }
     }
 
-    //checks the cell to the upper left of current cell
+    //checks cell to the upper left of current cell
     if(curCell->x != 1 && curCell->y != 1){
         if(board[curCell->x-2][curCell->y-2]->state == 1){
             curCell->numLiveNeighbors += 1;
         }
     }
 
-    //checks the cell to the lower right of the current cell
+    //checks cell to the lower right of the current cell
     if(curCell->x != 1 && curCell->y != 10){
         if(board[curCell->x-2][curCell->y]->state == 1){
             curCell->numLiveNeighbors += 1;
         }
     }
 
-    //checks the cell above the current cell
+
+    //checks cell above the current cell
     if(curCell->y != 1){
         if(board[curCell->x-1][curCell->y-2]->state == 1){
             curCell->numLiveNeighbors += 1;
         }
     }
 
-    //checks the cell to the upper right of the current cell
+    //checks cell to the upper right of the current cell
     if(curCell->x != 10 && curCell->y != 1){
         if(board[curCell->x][curCell->y-2]->state == 1){
             curCell->numLiveNeighbors += 1;
         }
     }
 
-    //checks the cell to the right of the current cell
+    //checks cell to the right of the current cell
     if(curCell->x != 10){
         if(board[curCell->x][curCell->y-1]->state == 1){
             curCell->numLiveNeighbors += 1;
         }
     }
 
-    //checks the cell to the lower right of the current cell
+    //checks cell to the lower right of the current cell
     if(curCell->x != 10 && curCell->y != 10){
-        if(board[curCell->x-1][curCell->y-2]->state == 1){
+        if(board[curCell->x][curCell->y]->state == 1){
             curCell->numLiveNeighbors += 1;
         }
     }
 
-    //checks the cell below the current cell
+    
+    //checks cell below the current cell
     if(curCell->y != 10){
         if(board[curCell->x-1][curCell->y]->state == 1){
             curCell->numLiveNeighbors += 1;
         }
     }
-
+    
 }
 
 /*
@@ -154,6 +158,16 @@ Return if you updated cells or not to break out of while loop from main.
 */
 bool updateCellState(Cell* board[][10], int boardSize) 
 {
+    bool gameWillContinue = false;
+
+    //zero out the number of live neighbors for each cell
+    for(int i = 0; i < boardSize; i++){
+        for(int j = 0; j < boardSize; j++){
+            board[i][j]->numLiveNeighbors = 0;
+        }
+    }
+
+
     //finds out how many live neighbors there are for each cell
     for(int i = 0; i < boardSize; i++){
         for(int j = 0; j < boardSize; j++){
@@ -168,17 +182,16 @@ bool updateCellState(Cell* board[][10], int boardSize)
             if(board[k][p]->state == 0){
                 if(board[k][p]->numLiveNeighbors == 3){
                     board[k][p]->state = 1; 
+                    gameWillContinue = true;
                 }
-            }
-
-            //checking if cell is alive (and whether or not it will live on)
-            if(board[k][p]->state == 1){
+            }else if(board[k][p]->state == 1){//if cell is alive check to see if it gets to stay alive
                 if(board[k][p]->numLiveNeighbors < 2 || board[k][p]->numLiveNeighbors > 3){
                     board[k][p]->state = 0; 
+                    gameWillContinue = true;
                 }
             }
         }
     }
 
-    return false;
+    return gameWillContinue;
 }
