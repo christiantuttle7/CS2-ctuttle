@@ -60,6 +60,7 @@ void readBoard(Cell* board[][10], int boardSize)
     
 
     boardFile.close();
+    cin.get();
 
 }
 
