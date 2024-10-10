@@ -14,3 +14,16 @@ Status: Done
 Self Grade: 100/100
 Notes: Ran and tested program many times
 
+
+
+
+
+HOMEWORKS
+
+Homwork 1:
+Name: Movie Datbase
+Dat: 10/9/2024
+Status: Done
+Self Grade: 100/100
+Notes: Rand and tested program many times
+
