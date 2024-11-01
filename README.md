@@ -14,6 +14,13 @@ Status: Done
 Self Grade: 100/100
 Notes: Ran and tested program many times
 
+Lab3:
+Name: Fraction calculator
+Date:10/7/2024
+Status: Done
+Self Grade: 100/100
+Notes: Ran and tested program many times
+
 
 
 
