@@ -25,9 +25,7 @@ namespace databases{
             ~database();
             void addMedia();
             void removeMedia();
-            void printMovies();
-            void printMusic();
-            void printTvShows();
+            void printMedia();
             void searchMediaById();
 
             void searchMediaByGenre();

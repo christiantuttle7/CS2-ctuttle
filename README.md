@@ -34,3 +34,11 @@ Status: Done
 Self Grade: 100/100
 Notes: Rand and tested program many times
 
+
+Homework 2:
+Name: Media Database
+date: 10/14/2024
+Status: Unfinished
+Self-Grade: 0/100
+Notes: Still Working On It
+

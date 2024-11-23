@@ -13,7 +13,7 @@ namespace medias{
             string title;
             int year;
         public:
-            void setId(string);
+            void setID(string);
             void setTitle(string);
             void setYear(int);
             string getId();
