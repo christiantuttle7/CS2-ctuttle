@@ -12,9 +12,12 @@ databases::database::database(){
     //allocate memory
     for(int i = 0; i <100; i++){
         movieDatabase[i] = new movies::movie;
+        musicDatabase[i] = new musics::music;
+        tvshowDatabase[i] = new tvshows::tvshow;
     }
     
 
+    //GETTING MOVIES
     //opening file
     ifstream movieFile ("movies.csv");
 
@@ -36,7 +39,7 @@ databases::database::database(){
         
         //get the title id and store it
         getline(line, xtitleId, ',' );
-        movieDatabase[movieCounter]->setTitleID(xtitleId);
+        movieDatabase[movieCounter]->setID(xtitleId);
 
         
         //get the title and store it
@@ -64,13 +67,143 @@ databases::database::database(){
         movieDatabase[movieCounter]->setDirector(xdirector);
 
         movieCounter++;
+    }
+    numberOfMovies = movieCounter;
+
+
+   //GETTING MUSIC
+    //opening file
+    ifstream musicFile ("music.csv");
+    //each line of the file will be put into this string
+    string musictempLine;
+
+
+    string xcomposer;
+
+    int xplaytime, xtracks;
+
+    
+
+
+
+    int musicCounter = 0;    
+    while( getline(musicFile, musictempLine, '\n')){
+        stringstream musicline(musictempLine);
+        
+        
+        //get the title id and store it
+        getline(musicline, xtitleId, ',' );
+        musicDatabase[musicCounter]->setID(xtitleId);
 
         
+        //get the title and store it
+        getline(musicline, xtitle, ',' );
+        musicDatabase[musicCounter]->setTitle(xtitle);
 
+        //get the year, store as an int
+        musicline >> xyear;
+        musicline.ignore();
+        musicDatabase[musicCounter]->setYear(xyear);
+
+
+        //getting the composer
+        getline(musicline, xcomposer, ',');
+        musicDatabase[musicCounter]->setComposer(xcomposer);
+
+
+
+        //get the genre and store it
+        getline(musicline, xgenre, ',');
+        musicDatabase[musicCounter]->setGenre(xgenre);
+
+
+        //get the palytime, store as int
+        musicline >> xtracks;
+        musicline.ignore();
+        musicDatabase[musicCounter]->setNumOfTracks(xtracks);
+
+
+        //get the rating, store as float
+        musicline >> xplaytime;
+        musicline.ignore();
+        musicDatabase[musicCounter]->setTotalPlaytime(xplaytime);
+
+        musicCounter++;
 
     }
 
-    numberOfMovies = movieCounter;
+    numberOfMusic = musicCounter;
+
+
+
+
+
+
+    //GETTING TV SHOWS
+    //opening file
+    ifstream tvshowFile ("tvshows.csv");
+    //each line of the file will be put into this string
+    string tvshowtempLine;
+
+
+
+    string xtvshow;
+    int xepisodes;
+    
+
+
+
+    int tvshowCounter = 0;    
+    while( getline(tvshowFile, tvshowtempLine, '\n')){
+        stringstream tvshowline(tvshowtempLine);
+        
+        
+        //get the title id and store it
+        getline(tvshowline, xtitleId, ',' );
+        tvshowDatabase[tvshowCounter]->setID(xtitleId);
+
+        
+        //get the title and store it
+        getline(tvshowline, xtitle, ',' );
+        tvshowDatabase[tvshowCounter]->setTitle(xtitle);
+
+        //get the year, store as an int
+        tvshowline >> xyear;
+        tvshowline.ignore();
+        tvshowDatabase[tvshowCounter]->setYear(xyear);
+
+
+
+
+        //get the genre and store it
+        getline(tvshowline, xgenre, ',');
+        tvshowDatabase[tvshowCounter]->setGenre(xgenre);
+
+
+        //get the palytime, store as int
+        tvshowline >> xrating;
+        tvshowline.ignore();
+        tvshowDatabase[tvshowCounter]->setRating(xrating);
+
+
+        //get the rating, store as float
+        tvshowline >> xepisodes;
+        tvshowline.ignore();
+        tvshowDatabase[tvshowCounter]->setNumOfEpisodes(xepisodes);
+        tvshowCounter++;
+
+    }
+
+    numberOfTvShows = tvshowCounter;
+
+
+
+
+    movieFile.close();
+    musicFile.close();
+    tvshowFile.close();
+ 
+ 
 
     
 }
@@ -93,16 +226,16 @@ void databases::database::printMedia(){
     cout << "What type of media would you like to display" << endl;
     cout << "1. Movies\n2. Music\n3. TV Shows" << endl;
     cin >> mediaType;
+    cin.ignore();
 
 
     //display movies
     if(mediaType == 1){
-        cout << "All Movies" << endl;
         for(int i = 0; i < numberOfMovies; i++){
             cout << "Movie " << i+1 <<": " << endl;
             cout << "Title: " <<movieDatabase[i]->getTitle() << endl;
             cout << "Director: " <<movieDatabase[i]->getDirector() << endl;
-            cout <<"ID: " << movieDatabase[i]->getId() << endl;
+            cout <<"ID: " << movieDatabase[i]->getID() << endl;
             cout <<"Genre: " <<movieDatabase[i]->getGenre() << endl;
             cout <<"Year: " <<movieDatabase[i]->getYear() << endl;
             cout <<"Rating: " <<movieDatabase[i]->getRating() << endl;
@@ -111,11 +244,11 @@ void databases::database::printMedia(){
     }
     //display music
     else if(mediaType == 2){
-        for(int i = 0; i < numberOfMovies; i++){
+        for(int i = 0; i < numberOfMusic; i++){
             cout << "Album " << i+1 <<": " << endl;
             cout << "Title: " <<musicDatabase[i]->getTitle() << endl;
             cout << "Composer: " <<musicDatabase[i]->getComposer() << endl;
-            cout <<"ID: " << musicDatabase[i]->getId() << endl;
+            cout <<"ID: " << musicDatabase[i]->getID() << endl;
             cout <<"Genre: " <<musicDatabase[i]->getGenre() << endl;
             cout <<"Year: " <<musicDatabase[i]->getYear() << endl;
             cout <<"Number Of Tracks: " <<musicDatabase[i]->getNumOfTracks() << endl;
@@ -125,11 +258,11 @@ void databases::database::printMedia(){
 
     }
     //display tv shows
-    else{
+    else if(mediaType == 3){
         for(int i = 0; i < numberOfTvShows; i++){
-            cout << "Album " << i+1 <<": " << endl;
+            cout << "Tv Show " << i+1 <<": " << endl;
             cout << "Title: " <<tvshowDatabase[i]->getTitle() << endl;
-            cout <<"ID: " << tvshowDatabase[i]->getId() << endl;
+            cout <<"ID: " << tvshowDatabase[i]->getID() << endl;
             cout <<"Genre: " <<tvshowDatabase[i]->getGenre() << endl;
             cout <<"Year: " <<tvshowDatabase[i]->getYear() << endl;
             cout <<"Number Of Episodes: " <<tvshowDatabase[i]->getNumOfEpisodes() << endl;
@@ -149,7 +282,8 @@ void databases::database::addMedia(){
 
     int choice;
     cout << "What type of media would you like to add: \n1. Movie\n2. Music\n3. TV show" << endl;
-    cin >> choice;   
+    cin >> choice; 
+    cin.ignore();  
     
     //First asking the user some questions that pertain to all media
     //title
@@ -171,8 +305,11 @@ void databases::database::addMedia(){
     cout << "What is the genre? ";
     getline(cin, tempGenre);
 
+    
+
 
     if(choice == 1){
+        
         movieDatabase[numberOfMovies]->setTitle(tempTitle);
         movieDatabase[numberOfMovies]->setID(tempTitleId);
         movieDatabase[numberOfMovies]->setYear(tempYear);
@@ -202,13 +339,13 @@ void databases::database::addMedia(){
          string tempComposer;
         cout <<"Who is the composer? ";
         getline(cin, tempComposer);
-        cin.ignore();
         musicDatabase[numberOfMusic]->setComposer(tempComposer);
 
         //number of trracks
         int tempNumOfTracks;
         cout << "Whats the number of tracks? ";
         cin >> tempNumOfTracks;
+        cin.ignore();
         musicDatabase[numberOfMusic]->setNumOfTracks(tempNumOfTracks);
 
         //playtime
@@ -262,86 +399,77 @@ void databases::database::addMedia(){
 }
 
 
-void databases::database::searchMediaById(){
+
+
+void databases::database::searchMedia(){
     string searchInput;
 
-    bool mediaFoundBool = false;
-    int mediaFoundType;
-    int mediaFoundNum = 0;
+    bool mediaFound = false;
 
-    
-    cout <<"What is the title or titleID of the movie you want: ";
+    cout << endl;
+    cout <<"What is the title/ID/Genre: ";
     getline(cin, searchInput);
 
-    //go through every movie and see if the search input matches te movie
+
+
+    //go through every movie and see if the search input matches to movie
     for(int i = 0; i < numberOfMovies; i++){
-        if(movieDatabase[i]->getId() == searchInput||
+        if(movieDatabase[i]->getID() == searchInput||
             movieDatabase[i]->getGenre() == searchInput ||
             movieDatabase[i]->getTitle() == searchInput ){
-            mediaFoundBool = true;
-            mediaFoundNum = i;
-            mediaFoundType = 1;
+            cout << "Title: " <<movieDatabase[i]->getTitle() << endl;
+            cout << "Director: " <<movieDatabase[i]->getDirector() << endl;
+            cout <<"ID: " << movieDatabase[i]->getID() << endl;
+            cout <<"Genre: " <<movieDatabase[i]->getGenre() << endl;
+            cout <<"Year: " <<movieDatabase[i]->getYear() << endl;
+            cout <<"Rating: " <<movieDatabase[i]->getRating() << endl;
+            cout << endl;
+            mediaFound = true;
         }
     }
 
-    //go through every music and see if the search input matches te movie
+    //go through every music and see if the search input matches any of the music
     for(int i = 0; i < numberOfMusic; i++){
-        if(musicDatabase[i]->getId() == searchInput||
+        if(musicDatabase[i]->getID() == searchInput||
             musicDatabase[i]->getGenre() == searchInput ||
             musicDatabase[i]->getTitle() == searchInput){
-            mediaFoundBool = true;
-            mediaFoundNum = i;
-            mediaFoundType = 2;
-        }
+            mediaFound = true;
+            cout << "Title: " <<musicDatabase[i]->getTitle() << endl;
+            cout << "Composer: " <<musicDatabase[i]->getComposer() << endl;
+            cout <<"ID: " << musicDatabase[i]->getID() << endl;
+            cout <<"Genre: " <<musicDatabase[i]->getGenre() << endl;
+            cout <<"Year: " <<musicDatabase[i]->getYear() << endl;
+            cout << "Number of Tracks: " << musicDatabase[i]->getNumOfTracks() << endl;
+            cout <<"Playtime: " <<musicDatabase[i]->getTotalPlaytime() << endl;
+            cout << endl;
+    }
     }
 
     //go through every tv show and see if the search input matches te movie
     for(int i = 0; i < numberOfMovies; i++){
-        if(tvshowDatabase[i]->getId() == searchInput||
+        if(tvshowDatabase[i]->getID() == searchInput||
             tvshowDatabase[i]->getGenre() == searchInput ||
             movieDatabase[i]->getTitle() == searchInput ){
-            mediaFoundBool = true;
-            mediaFoundNum = i;
-            mediaFoundType = 3;
+            cout << "Title: " <<tvshowDatabase[i]->getTitle() << endl;
+            cout <<"ID: " << tvshowDatabase[i]->getID() << endl;
+            cout <<"Genre: " <<tvshowDatabase[i]->getGenre() << endl;
+            cout <<"Year: " <<tvshowDatabase[i]->getYear() << endl;
+            cout <<"Rating: " <<tvshowDatabase[i]->getRating() << endl;
+            cout << "Number of Episodes: " <<tvshowDatabase[i]->getNumOfEpisodes() << endl;
+            cout << endl;
         }
     }
 
-    if(mediaFoundBool){
-        cout << "\nMedia Found!" << endl;
-        if(mediaFoundType == 1){
-            cout << "Title: " <<movieDatabase[mediaFoundNum]->getTitle() << endl;
-            cout << "Director: " <<movieDatabase[mediaFoundNum]->getDirector() << endl;
-            cout <<"ID: " << movieDatabase[mediaFoundNum]->getId() << endl;
-            cout <<"Genre: " <<movieDatabase[mediaFoundNum]->getGenre() << endl;
-            cout <<"Year: " <<movieDatabase[mediaFoundNum]->getYear() << endl;
-            cout <<"Rating: " <<movieDatabase[mediaFoundNum]->getRating() << endl;
-            cout << endl;
-
-        }
-        if(mediaFoundType == 2){
-            cout << "Title: " <<musicDatabase[mediaFoundNum]->getTitle() << endl;
-            cout << "Composer: " <<musicDatabase[mediaFoundNum]->getComposer() << endl;
-            cout <<"ID: " << musicDatabase[mediaFoundNum]->getId() << endl;
-            cout <<"Genre: " <<musicDatabase[mediaFoundNum]->getGenre() << endl;
-            cout <<"Year: " <<musicDatabase[mediaFoundNum]->getYear() << endl;
-            cout << "Number of Tracks: " << musicDatabase[mediaFoundNum]->getNumOfTracks() << endl;
-            cout <<"Playtime: " <<musicDatabase[mediaFoundNum]->getTotalPlaytime() << endl;
-            cout << endl;
-        }
-        if(mediaFoundType == 3){
-            cout << "Title: " <<tvshowDatabase[mediaFoundNum]->getTitle() << endl;
-            cout <<"ID: " << tvshowDatabase[mediaFoundNum]->getId() << endl;
-            cout <<"Genre: " <<tvshowDatabase[mediaFoundNum]->getGenre() << endl;
-            cout <<"Year: " <<tvshowDatabase[mediaFoundNum]->getYear() << endl;
-            cout <<"Rating: " <<tvshowDatabase[mediaFoundNum]->getRating() << endl;
-            cout << "Number of Episodes: " <<tvshowDatabase[mediaFoundNum]->getNumOfEpisodes() << endl;
-            cout << endl;
-        }
+    if(!mediaFound){
+        cout << "No Media Found" << endl;
+      
     }
 
 
     
 }
+
+
 
 void databases::database::removeMedia(){
     
@@ -356,17 +484,17 @@ void databases::database::removeMedia(){
 
     //finding out which movie has the id the user provided
     for(int k = 0; k < numberOfMovies; k++){
-        if(movieDatabase[k]->getId() == chosenMedia){
+        if(movieDatabase[k]->getID() == chosenMedia){
             chosenMediaNumber = k;
             mediaType = 1;
             mediaFound = true;
         }
-        if(musicDatabase[k]->getId() == chosenMedia){
+        if(musicDatabase[k]->getID() == chosenMedia){
             chosenMediaNumber = k;
             mediaType =2;
             mediaFound = true;
         }
-        if(tvshowDatabase[k]->getId() == chosenMedia){
+        if(tvshowDatabase[k]->getID() == chosenMedia){
             chosenMediaNumber = k;
             mediaType = 3;
             mediaFound = true;
@@ -380,7 +508,7 @@ void databases::database::removeMedia(){
             for(int i = chosenMediaNumber; i < numberOfMovies; i++){
                 movieDatabase[i]->setDirector(movieDatabase[i+1]->getDirector());
                 movieDatabase[i]->setTitle(movieDatabase[i+1]->getTitle());
-                movieDatabase[i]->setID(movieDatabase[i+1]->getId());
+                movieDatabase[i]->setID(movieDatabase[i+1]->getID());
                 movieDatabase[i]->setGenre(movieDatabase[i+1]->getGenre());
                 movieDatabase[i]->setYear(movieDatabase[i+1]->getYear());
                 movieDatabase[i]->setRating(movieDatabase[i+1]->getRating());
@@ -393,7 +521,7 @@ void databases::database::removeMedia(){
             for(int i = chosenMediaNumber; i < numberOfMovies; i++){
                 musicDatabase[i]->setComposer(musicDatabase[i+1]->getComposer());
                 musicDatabase[i]->setTitle(musicDatabase[i+1]->getTitle());
-                musicDatabase[i]->setID(musicDatabase[i+1]->getId());
+                musicDatabase[i]->setID(musicDatabase[i+1]->getID());
                 musicDatabase[i]->setGenre(musicDatabase[i+1]->getGenre());
                 musicDatabase[i]->setYear(musicDatabase[i+1]->getYear());
                 musicDatabase[i]->setNumOfTracks(musicDatabase[i+1]->getNumOfTracks());
@@ -407,7 +535,7 @@ void databases::database::removeMedia(){
             for(int i = chosenMediaNumber; i < numberOfMovies; i++){
                 tvshowDatabase[i]->setNumOfEpisodes(tvshowDatabase[i+1]->getNumOfEpisodes());
                 tvshowDatabase[i]->setTitle(tvshowDatabase[i+1]->getTitle());
-                tvshowDatabase[i]->setID(tvshowDatabase[i+1]->getId());
+                tvshowDatabase[i]->setID(tvshowDatabase[i+1]->getID());
                 tvshowDatabase[i]->setGenre(tvshowDatabase[i+1]->getGenre());
                 tvshowDatabase[i]->setYear(tvshowDatabase[i+1]->getYear());
                 tvshowDatabase[i]->setRating(tvshowDatabase[i+1]->getRating());
@@ -429,13 +557,16 @@ void databases::database::removeMedia(){
 
 
 
-void databases::database::exportMovies(){
+void databases::database::exportMedia(){
     ofstream movieExport ("moviesExport.csv");
+    ofstream musicExport ("musicExport.csv");
+    ofstream tvshowExport ("tvshowExport.csv");
+
 
     //exporting the movie list to a different csv.
     for(int i = 0; i < numberOfMovies; i++){
         
-        movieExport <<movieDatabase[i]->getId() << ',';
+        movieExport <<movieDatabase[i]->getID() << ',';
         movieExport  <<movieDatabase[i]->getTitle() << ',';
         movieExport << movieDatabase[i]->getYear() << ',';
         movieExport  <<movieDatabase[i]->getGenre() << ',';
@@ -444,18 +575,9 @@ void databases::database::exportMovies(){
         
     }
 
-    
-    movieExport.close();
-}
-
-
-void databases::database::exportMusic(){
-    ofstream musicExport ("moviesExport.csv");
-
-    //exporting the movie list to a different csv.
-    for(int i = 0; i < numberOfMovies; i++){
+    for(int i = 0; i < numberOfMusic; i++){
         
-        musicExport <<musicDatabase[i]->getId() << ',';
+        musicExport <<musicDatabase[i]->getID() << ',';
         musicExport  <<musicDatabase[i]->getTitle() << ',';
         musicExport << musicDatabase[i]->getYear() << ',';
         musicExport  <<musicDatabase[i]->getGenre() << ',';
@@ -465,19 +587,10 @@ void databases::database::exportMusic(){
         
     }
 
-    
-    musicExport.close();
-}
 
-
-
-void databases::database::exportTvShows(){
-    ofstream tvshowExport ("moviesExport.csv");
-
-    //exporting the movie list to a different csv.
     for(int i = 0; i < numberOfMovies; i++){
         
-        tvshowExport <<tvshowDatabase[i]->getId() << ',';
+        tvshowExport <<tvshowDatabase[i]->getID() << ',';
         tvshowExport  <<tvshowDatabase[i]->getTitle() << ',';
         tvshowExport << tvshowDatabase[i]->getYear() << ',';
         tvshowExport  <<tvshowDatabase[i]->getGenre() << ',';
@@ -487,7 +600,15 @@ void databases::database::exportTvShows(){
     }
 
     
+    movieExport.close();
+    musicExport.close();
     tvshowExport.close();
 }
+
+
+
+
+
+
 
 

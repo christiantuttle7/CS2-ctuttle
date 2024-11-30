@@ -11,14 +11,17 @@ namespace medias{
         private:
             string id;
             string title;
+            string genre;
             int year;
         public:
             void setID(string);
             void setTitle(string);
             void setYear(int);
-            string getId();
+            void setGenre(string);
+            string getID();
             string getTitle();
             int getYear();
+            string getGenre();
     };
 
 };

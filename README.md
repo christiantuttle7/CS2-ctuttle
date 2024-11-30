@@ -21,6 +21,13 @@ Status: Done
 Self Grade: 100/100
 Notes: Ran and tested program many times
 
+Lab4:
+Name: Doubly Linked List
+Date: 
+Status: Unfinished
+Self-Grade:
+Notes: Seems to populate the list correctly. Working on everything else now
+
 
 
 
@@ -39,6 +46,6 @@ Homework 2:
 Name: Media Database
 date: 10/14/2024
 Status: Unfinished
-Self-Grade: 0/100
-Notes: Still Working On It
+Self-Grade: 90/100
+Notes: Works good. Would like to test a few more times to make sure everything runs well. Would also like to add more/better comments
 

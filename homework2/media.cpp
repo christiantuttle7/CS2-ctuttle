@@ -19,7 +19,7 @@ void medias::media::setYear(int x){
     year = x;
 }
             
-string medias::media::getId(){
+string medias::media::getID(){
     return id;
 }
 

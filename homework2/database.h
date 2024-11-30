@@ -3,6 +3,7 @@
 #include <sstream>
 #include <fstream>
 #include "movie.h"
+#include "media.h"
 #include "music.h"
 #include "tvshows.h"
 
@@ -26,13 +27,8 @@ namespace databases{
             void addMedia();
             void removeMedia();
             void printMedia();
-            void searchMediaById();
-
-            void searchMediaByGenre();
-            void searhMediaByTitle();
-            void exportMovies();
-            void exportTvShows();
-            void exportMusic();
+            void searchMedia();
+            void exportMedia();
             
 
     };

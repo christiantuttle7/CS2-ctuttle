@@ -1,5 +1,4 @@
 
-
 #include "database.h"
 
 
@@ -20,11 +19,11 @@ int main(){
         //printing user interface
         cout << endl;
         cout << "What would you like to do (enter number)?" << endl;
-        cout << "1. Print movies" << endl;
-        cout << "2. Add a movie" << endl;
-        cout << "3. Remove movie" << endl;
-        cout << "4. Search for a movie" << endl;
-        cout << "5. Export movies to a file" << endl;
+        cout << "1. Print media" << endl;
+        cout << "2. Add media" << endl;
+        cout << "3. Remove media" << endl;
+        cout << "4. Search for media" << endl;
+        cout << "5. Export mdias to a file" << endl;
         cout << "6. Exit Program" << endl;
 
         int userInput;
@@ -36,19 +35,19 @@ int main(){
         //switch that will call on the function the user wants
         switch (userInput){
             case 1:
-                nice.printMovies();
+                nice.printMedia();
                 break;
             case 2:
-                nice.addMovie();
+                nice.addMedia();
                 break;
             case 3:
-                nice.removeMovie();
+                nice.removeMedia();
                 break;
             case 4:
-                nice.searchForMovie();
+                nice.searchMedia();
                 break;
             case 5:
-                nice.exportMovies();
+                nice.exportMedia();
                 break;
             case 6:
                 keepGoing = false;
