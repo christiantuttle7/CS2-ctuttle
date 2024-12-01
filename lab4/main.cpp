@@ -4,17 +4,19 @@
 
 using namespace std;
 
-//void test();
+void test();
 
 int main(int argc, char* argv[])
 {
-    /*
+    
     if(argc >= 2 && (string)argv[1] == "test")
     {
         test();
         return 0;
     }
-    */
+
+    test();
+    
     List<int> myList;
     int insertNumber = 0;
 
@@ -28,20 +30,21 @@ int main(int argc, char* argv[])
         cin >> insertNumber;
     }
     
-    //cout << "You entered " << myList.size() << " elements." << endl;
-    //cout << "The first element is: " << myList.front() << endl;
-    //cout << "The last element is: " << myList.back() << endl;
+    cout << "You entered " << myList.size() << " elements." << endl;
+
+    cout << "The first element is: " << myList.front() << endl;
+    cout << "The last element is: " << myList.back() << endl;
     cout << "The entire list is: " << myList << endl;
     
     cout << endl;
-    //cout << "Removing the first element: " << myList.pop_front() << endl;
-    //cout << "Removing the last element: " << myList.pop_back() << endl;
-    //cout << "The size of the list now is: " << myList.size() << endl;
-    //cout << "The entire list is now: " << myList << endl;
+    cout << "Removing the first element: " << myList.pop_front() << endl;
+    cout << "Removing the last element: " << myList.pop_back() << endl;
+    cout << "The size of the list now is: " << myList.size() << endl;
+    cout << "The entire list is now: " << myList << endl;
 
     return 0;
 }
-/*
+
 void test()
 {
     List<int> testList1;
@@ -63,4 +66,3 @@ void test()
     cout << "All test cases passed" << endl;
 }
 
-*/

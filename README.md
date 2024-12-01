@@ -23,10 +23,10 @@ Notes: Ran and tested program many times
 
 Lab4:
 Name: Doubly Linked List
-Date: 
-Status: Unfinished
-Self-Grade:
-Notes: Seems to populate the list correctly. Working on everything else now
+Date: 11/11/2024
+Status: Finished
+Self-Grade: 100/100?
+Notes: I have fixed everything and it now works. The only function I am not sure works correctly is the deconstructor (hard to test)
 
 
 
