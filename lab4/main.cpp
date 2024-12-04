@@ -8,14 +8,14 @@ void test();
 
 int main(int argc, char* argv[])
 {
-    
+
     if(argc >= 2 && (string)argv[1] == "test")
     {
         test();
         return 0;
     }
 
-    test();
+
     
     List<int> myList;
     int insertNumber = 0;

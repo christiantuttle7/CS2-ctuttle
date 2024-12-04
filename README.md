@@ -28,6 +28,13 @@ Status: Finished
 Self-Grade: 100/100?
 Notes: I have fixed everything and it now works. The only function I am not sure works correctly is the deconstructor (hard to test)
 
+Lab5:
+Name: BST
+Date:12/9/2024
+Status: Unfinished
+Self-Grade:
+Notes: Still working on, lot of bugs with it rn
+
 
 
 
@@ -48,4 +55,11 @@ date: 10/14/2024
 Status: Unfinished
 Self-Grade: 90/100
 Notes: Works good. Would like to test a few more times to make sure everything runs well. Would also like to add more/better comments
+
+Homework 3:
+Name: RPN
+Date: 11/29/2024
+Status: Done
+Self-Grade: 100/100
+Notes: Tested a bunch of times and works good. I used a lot of the node and list code from lab3 and edited it.
 
