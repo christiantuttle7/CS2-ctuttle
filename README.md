@@ -26,14 +26,14 @@ Name: Doubly Linked List
 Date: 11/11/2024
 Status: Finished
 Self-Grade: 100/100?
-Notes: I have fixed everything and it now works. The only function I am not sure works correctly is the deconstructor (hard to test)
+Notes: I have fixed everything and it now works. The only function I am not sure works correctly is the deconstructor
 
 Lab5:
 Name: BST
 Date:12/9/2024
-Status: Unfinished
-Self-Grade:
-Notes: Still working on, lot of bugs with it rn
+Status: Done
+Self-Grade:100/100
+Notes: It works and passes all test cases
 
 
 
@@ -62,4 +62,12 @@ Date: 11/29/2024
 Status: Done
 Self-Grade: 100/100
 Notes: Tested a bunch of times and works good. I used a lot of the node and list code from lab3 and edited it.
+
+
+Homework 4:
+Name: Word Counter
+Date: 12/7/2024
+Status: Pretty Much Done
+Self-Grade:
+Notes: Seems to work and passes tests. Might look more into it after I finish the final
 
