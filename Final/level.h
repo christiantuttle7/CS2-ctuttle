@@ -7,7 +7,7 @@ class Level
 {
     private:
     Villain _villain;
-    string description;
+    string _description;
 
     Level* _next;
 
@@ -15,7 +15,9 @@ class Level
     Level(string, Villain);
     void setVillain(Villain);
     void setNext(Level*);
-    int getVillain();
+    void setDescription(string);
+    Villain getVillain();
+    string getDescription();
     Level* getNext();
 };
 
@@ -29,7 +31,7 @@ Level::Level(string, Villain)
 
 void Level::setVillain(Villain newBoss)
 {
-    boss = newBoss;
+    _villain = newBoss;
 }
 
 
@@ -40,10 +42,18 @@ void Level::setNext(Level* next)
     _next = next;
 }
 
+void Level::setDescription(string newDes){
+    _description = newDes;
+}
 
-int Level::getVillain()
+
+Villain Level::getVillain()
 {
     return _villain;
+}
+
+string Level::getDescription(){
+    return _description;
 }
 
 

@@ -1,5 +1,5 @@
 #pragma once
-#include "node.h"
+#include "level.h"
 #include <iostream>
 
 using namespace std;
@@ -23,7 +23,7 @@ class Game
         size_t size();
 
         void push(Villain, string, string);
-        int pop();
+        string pop();
         int top();
         
 
@@ -54,7 +54,7 @@ Game::~Game()
 
 // return true if the list is empty, false otherwise.
 // Do not just check listSize, should actually check _head and _tail
-bool List::empty()
+bool Game::empty()
 {
     if(_firstRoom == nullptr){
         return true;
@@ -64,25 +64,27 @@ bool List::empty()
 }
 
 // return number of elements in list
-size_t List::size()
+size_t Game::size()
 {
     return listSize;
 }
 
 // add an element to the beginning of the list, updating _head
-void Game::push(Villain villain)
+void Game::push(Villain villain, string description)
 {   
-    if(_firstRoom == nullptr ){
+    if(_firstRoom == nullptr){
         _firstRoom = new Level;
         _firstRoom->setVillain(villain);
+        _firstRoom->setDescription(description);
         listSize++;
 
     }
     else{
-        Node* newNode = new Node;
-        newNode->setData(data);
-        newNode->setNext(_head);
-        _head = newNode;
+        Level* newLevel = new Level;
+        newLevel->setVillain(villain);
+        newLevel->setDescription(description);
+        newLevel->setNext(_firstRoom);
+        _firstRoom = newLevel;
         listSize++;
     }
     
