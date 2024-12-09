@@ -1,4 +1,4 @@
-#include "player.h"
+#pragma once
 
 #include "level.h"
 #include <iostream>
@@ -18,7 +18,7 @@ class Game
 
     public:
         Game();
-        ~Game();
+
 
         bool empty();
         size_t size();
@@ -35,28 +35,16 @@ class Game
 Game::Game()
 {   
    //pushing final level
-    Villain joker("Joker", 100, 25);
-    Villain *pointerJoker = &joker;
-    string description = "you enter the final floor to see your opponent is joker";
-    Level finalLevel(description, pointerJoker);
+    // Player joker("Joker", 100, 25);
+    // Player *pointerJoker = &joker;
+    // string description = "you enter the final floor to see your opponent is joker";
+    // Level finalLevel(description, pointerJoker);
 
-    
+    _firstRoom = nullptr;
 
 
 }
 
-// iteratively delete the list starting at _head
-Game::~Game()
-{
-    Level* currentLevel = _firstRoom;
-    while(currentLevel != nullptr){
-        Level* levelToDelete = currentLevel;
-        currentLevel = currentLevel->getNext();
-        delete levelToDelete;
-    }
-    
-    
-}
 
 // return true if the list is empty, false otherwise.
 // Do not just check listSize, should actually check _head and _tail
@@ -112,9 +100,8 @@ void Game::pop()
         return;
     }
     
-    Level* tempLevel = _firstRoom;
     _firstRoom = _firstRoom->getNext();
-    delete tempLevel;
+    
     listSize--;
     return;
 

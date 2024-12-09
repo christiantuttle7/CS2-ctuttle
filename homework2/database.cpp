@@ -477,7 +477,7 @@ void databases::database::removeMedia(){
     bool mediaFound = false;
     int mediaType;
     string chosenMedia;
-    cout <<"What is the ID of the movie you would like to remove: ";
+    cout <<"What is the ID of the media you would like to remove: ";
     cin >>chosenMedia;
     cin.ignore();
     int chosenMediaNumber;
@@ -505,6 +505,7 @@ void databases::database::removeMedia(){
     if(mediaFound){
         //if chosen media is a movie
         if(mediaType == 1){
+            delete movieDatabase[chosenMediaNumber];
             for(int i = chosenMediaNumber; i < numberOfMovies; i++){
                 movieDatabase[i]->setDirector(movieDatabase[i+1]->getDirector());
                 movieDatabase[i]->setTitle(movieDatabase[i+1]->getTitle());
@@ -518,6 +519,7 @@ void databases::database::removeMedia(){
         }
         //if chosen media is music
         if(mediaType == 2){
+            delete musicDatabase[chosenMediaNumber];
             for(int i = chosenMediaNumber; i < numberOfMovies; i++){
                 musicDatabase[i]->setComposer(musicDatabase[i+1]->getComposer());
                 musicDatabase[i]->setTitle(musicDatabase[i+1]->getTitle());
@@ -532,6 +534,7 @@ void databases::database::removeMedia(){
         }
         //if chosen media is a tv show
         if(mediaType == 3){
+            delete tvshowDatabase[chosenMediaNumber];
             for(int i = chosenMediaNumber; i < numberOfMovies; i++){
                 tvshowDatabase[i]->setNumOfEpisodes(tvshowDatabase[i+1]->getNumOfEpisodes());
                 tvshowDatabase[i]->setTitle(tvshowDatabase[i+1]->getTitle());

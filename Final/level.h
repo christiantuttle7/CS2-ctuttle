@@ -1,5 +1,5 @@
 #pragma once
-#include "player.h"
+#include "item.h"
 #include "villain.h"
 
 
@@ -7,34 +7,37 @@
 class Level
 {
     private:
-    Villain *_villain;
+    Player *_villain;
     string _description;
+    item *_item;
 
     Level* _next;
 
     public:
     Level();
-    Level(string, Villain*);
-    void setVillain(Villain*);
+    Level(string, Player*, item*);
+    void setVillain(Player*);
     void setNext(Level*);
     void setDescription(string);
-    Villain* getVillain();
+    Player* getVillain();
     string getDescription();
     Level* getNext();
+    item* getItem();
 
 };
 
 
-Level::Level(string description, Villain *villain)
+Level::Level(string description, Player *villain, item *newItem)
 {
     _villain = villain;
     _description = description;
+    _item = newItem;
 
     _next = nullptr;
 }
 
 
-void Level::setVillain(Villain *newBoss)
+void Level::setVillain(Player *newBoss)
 {
     _villain = newBoss;
 }
@@ -52,7 +55,7 @@ void Level::setDescription(string newDes){
 }
 
 
-Villain* Level::getVillain()
+Player* Level::getVillain()
 {
 
     return _villain;
@@ -66,4 +69,8 @@ string Level::getDescription(){
 Level* Level::getNext()
 {
     return _next;
+}
+
+item* Level::getItem(){
+    return _item;
 }

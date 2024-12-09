@@ -1,24 +1,27 @@
 #pragma once
 #include <iostream>
-#include "level.h"
+#include <cstdlib>
 using namespace std;
 
 
-class Villain{
+class Player{
     private:
         string Name;
         int hp;
         int damage;
 
     public:
-        Villain(string, int, int);
+        Player();
+        Player(string, int, int);
+        void attack(Player*, int);
         void attack(Player*);
        
         
         void setHP(int);
+        int getDamage();
         int getHP();
         string getName();
-        int getDamage();
+        void setDamage(int);
 
 
 
@@ -26,33 +29,59 @@ class Villain{
 
 };
 
+Player::Player(){
+    Name = "BATMAN";
+    hp = 100;
+    damage = 34;
+}
 
-Villain::Villain(string newname, int newhp, int newdamage){
+Player::Player(string newname, int newhp, int newdamage){
     Name = newname;
     hp = newhp;
     damage = newdamage;
 
 }
-void Villain::attack(Player* user){
+//villain attacking the user
+void Player::attack(Player* user){
     user->setHP(user->getHP() - damage);
     
 }
 
+//user attacking the villain
+void Player::attack(Player* villain, int attackType){
+    if(attackType == 1){
+        villain->setHP(villain->getHP() - damage);
+    }
+    if(attackType == 2){
+        int randomNum = rand() % 10001;
+        if(randomNum % 2 == 0){
+            villain->setHP(villain->getHP() - damage);
+            cout << "Batarang Hit!" << endl;
+        }else{
+            cout << "Batarang Missed :(" << endl;
+        }
+
+    }
+}
 
 
-int Villain::getHP(){
+int Player::getHP(){
     return hp;
 }
 
-void Villain::setHP(int newHP){
+void Player::setHP(int newHP){
     hp = newHP;
 }
 
-string Villain::getName(){
+string Player::getName(){
     return Name;
 }
 
-int Villain::getDamage(){
+int Player::getDamage(){
     return damage;
+}
+
+void Player::setDamage(int newDamage){
+    damage = newDamage;;
 }
 
