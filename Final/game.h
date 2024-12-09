@@ -1,4 +1,5 @@
-#pragma once
+#include "player.h"
+
 #include "level.h"
 #include <iostream>
 
@@ -22,9 +23,9 @@ class Game
         bool empty();
         size_t size();
 
-        void push(Villain, string, string);
-        string pop();
-        int top();
+        void push(Level*);
+        void pop();
+        Level top();
         
 
        
@@ -32,9 +33,14 @@ class Game
 
 // set to nullptr and initialize listSize
 Game::Game()
-{
-    _firstRoom = nullptr;
-    listSize = 0;
+{   
+   //pushing final level
+    Villain joker("Joker", 100, 25);
+    Villain *pointerJoker = &joker;
+    string description = "you enter the final floor to see your opponent is joker";
+    Level finalLevel(description, pointerJoker);
+
+    
 
 
 }
@@ -70,19 +76,15 @@ size_t Game::size()
 }
 
 // add an element to the beginning of the list, updating _head
-void Game::push(Villain villain, string description)
+void Game::push(Level *newLevel)
 {   
     if(_firstRoom == nullptr){
-        _firstRoom = new Level;
-        _firstRoom->setVillain(villain);
-        _firstRoom->setDescription(description);
+        _firstRoom = newLevel;
+        
         listSize++;
 
     }
     else{
-        Level* newLevel = new Level;
-        newLevel->setVillain(villain);
-        newLevel->setDescription(description);
         newLevel->setNext(_firstRoom);
         _firstRoom = newLevel;
         listSize++;
@@ -91,34 +93,30 @@ void Game::push(Villain villain, string description)
    return;
 
 }
-// return the first element in the list.
-// if the list is empty, print that out and return 0
 
-int List::top()
-{
-    if(empty()){
-        return 0;
-    }else{
-        return _head->getData();
-    }
+
+Level Game::top(){
+    return *_firstRoom;
 }
+
+
+
 
 // remove the first element from the list and return its data
 // if the list is empty, print that out and return 0;
 
 
-int List::pop()
+void Game::pop()
 {
     if(empty()){
-        return 0;
+        return;
     }
-    int dataToReturn = _head->getData();
     
-    Node* tempNode = _head;
-    _head = _head->getNext();
-    delete tempNode;
+    Level* tempLevel = _firstRoom;
+    _firstRoom = _firstRoom->getNext();
+    delete tempLevel;
     listSize--;
-    return dataToReturn;
+    return;
 
 }
 

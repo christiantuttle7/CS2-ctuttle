@@ -4,11 +4,11 @@
 
 using namespace std;
 
-
+template <class T1>
 class List
 {
     private:
-        Node* _head;
+        Node<T1>* _head;
        
         size_t listSize;
 
@@ -19,16 +19,17 @@ class List
         bool empty();
         size_t size();
 
-        void push(int);
-        int pop();
-        int top();
+        void push(T1);
+        T1 pop();
+        T1 top();
         
 
        
 };
 
 // set to nullptr and initialize listSize
-List::List()
+template <class T1>
+List<T1>::List()
 {
     _head = nullptr;
     listSize = 0;
@@ -37,11 +38,12 @@ List::List()
 }
 
 // iteratively delete the list starting at _head
-List::~List()
+template <class T1>
+List<T1>::~List()
 {
-    Node* currentNode = _head;
+    Node<T1>* currentNode = _head;
     while(currentNode != nullptr){
-        Node* nodeToDelete = currentNode;
+        Node<T1>* nodeToDelete = currentNode;
         currentNode = currentNode->getNext();
         delete nodeToDelete;
     }
@@ -51,7 +53,8 @@ List::~List()
 
 // return true if the list is empty, false otherwise.
 // Do not just check listSize, should actually check _head and _tail
-bool List::empty()
+template <class T1>
+bool List<T1>::empty()
 {
     if(_head == nullptr){
         return true;
@@ -61,22 +64,24 @@ bool List::empty()
 }
 
 // return number of elements in list
-size_t List::size()
+template <class T1>
+size_t List<T1>::size()
 {
     return listSize;
 }
 
 // add an element to the beginning of the list, updating _head
-void List::push(int data)
+template <class T1>
+void List<T1>::push(T1 data)
 {   
     if(_head == nullptr ){
-        _head = new Node;
+        _head = new Node<T1>;
         _head->setData(data);
         listSize++;
 
     }
     else{
-        Node* newNode = new Node;
+        Node<T1>* newNode = new Node<T1>;
         newNode->setData(data);
         newNode->setNext(_head);
         _head = newNode;
@@ -88,8 +93,8 @@ void List::push(int data)
 }
 // return the first element in the list.
 // if the list is empty, print that out and return 0
-
-int List::top()
+template <class T1>
+T1 List<T1>::top()
 {
     if(empty()){
         return 0;
@@ -101,15 +106,15 @@ int List::top()
 // remove the first element from the list and return its data
 // if the list is empty, print that out and return 0;
 
-
-int List::pop()
+template <class T1>
+T1 List<T1>::pop()
 {
     if(empty()){
         return 0;
     }
-    int dataToReturn = _head->getData();
+    float dataToReturn = _head->getData();
     
-    Node* tempNode = _head;
+    Node<T1>* tempNode = _head;
     _head = _head->getNext();
     delete tempNode;
     listSize--;

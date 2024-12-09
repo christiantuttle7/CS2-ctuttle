@@ -1,49 +1,49 @@
 #pragma once
 
-
+template <class T1>
 class Node
 {
     private:
-    int _data;
-    Node* _next;
+    T1 _data;
+    Node<T1>* _next;
 
     public:
     Node();
-    void setData(int);
+    void setData(T1);
     void setNext(Node*);
-    int getData();
-    Node* getNext();
+    T1 getData();
+    Node<T1>* getNext();
 };
 
-
-Node::Node()
+template <class T1>
+Node<T1>::Node()
 {
     
     _next = nullptr;
 }
 
-
-void Node::setData(int data)
+template <class T1>
+void Node<T1>::setData(T1 data)
 {
     _data = data;
 }
 
 
 
-
-void Node::setNext(Node* next)
+template <class T1>
+void Node<T1>::setNext(Node* next)
 {
     _next = next;
 }
 
-
-int Node::getData()
+template <class T1>
+T1 Node<T1>::getData()
 {
     return _data;
 }
 
-
-Node* Node::getNext()
+template <class T1>
+Node<T1>* Node<T1>::getNext()
 {
     return _next;
 }

@@ -1,14 +1,19 @@
 #pragma once
 #include <iostream>
+#include "level.h"
+
 using namespace std;
 
 
-class player{
+
+class Player{
     private:
         string name;
         int hp;
+
     public:
-        void attack();
+        Player();
+        void attack(Villain*);
         int getHP();
         void setHP(int);
 
@@ -16,11 +21,22 @@ class player{
 
 };
 
-int player::getHP(){
+Player::Player(){
+    name = "";
+    hp = 100;
+}
+
+
+int Player::getHP(){
     return hp;
 }
 
 
-void player::setHP(int newHP){
+void Player::setHP(int newHP){
     hp = newHP;
+}
+
+void Player::attack(Villain *boss){
+    boss->setHP(boss->getHP() - 25);
+    return;
 }

@@ -1,5 +1,5 @@
 # compiler name
-CXX = g++
+CXX = clang++
 
 # C++ compiler flags
 # -c : just do preprocess; compile and assemble into object files
@@ -13,7 +13,7 @@ CXXFLAGS = -c -g -Wall -std=c++17
 PROGRAM = main.out
 
 # list all .cpp files separated by space
-CPPFILES = main.cpp
+CPPFILES = main.cpp 
 
 # make all rule/default rule that'll be run when we run "make"
 # first compile each file to object file

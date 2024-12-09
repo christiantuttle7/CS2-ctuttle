@@ -188,7 +188,6 @@ void BST<T1>::insert(T1 data)
         _root = new Node<T1>;
         _root->setData(data);
         return;
-        
     }
     insertNode(_root, data);
 

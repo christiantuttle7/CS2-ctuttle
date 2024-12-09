@@ -3,33 +3,38 @@
 #include "villain.h"
 
 
+
 class Level
 {
     private:
-    Villain _villain;
+    Villain *_villain;
     string _description;
 
     Level* _next;
 
     public:
-    Level(string, Villain);
-    void setVillain(Villain);
+    Level();
+    Level(string, Villain*);
+    void setVillain(Villain*);
     void setNext(Level*);
     void setDescription(string);
-    Villain getVillain();
+    Villain* getVillain();
     string getDescription();
     Level* getNext();
+
 };
 
 
-Level::Level(string, Villain)
+Level::Level(string description, Villain *villain)
 {
+    _villain = villain;
+    _description = description;
 
     _next = nullptr;
 }
 
 
-void Level::setVillain(Villain newBoss)
+void Level::setVillain(Villain *newBoss)
 {
     _villain = newBoss;
 }
@@ -47,8 +52,9 @@ void Level::setDescription(string newDes){
 }
 
 
-Villain Level::getVillain()
+Villain* Level::getVillain()
 {
+
     return _villain;
 }
 

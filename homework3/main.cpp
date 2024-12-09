@@ -5,12 +5,12 @@
 #include <cassert>
 using namespace std;
 
-int rpn(string);
+float rpn(string);
 void test();
 
 int main(int argc, char* argv[]){
 
-    //to be able to 
+    //to be able to do from command line
     if(argc == 3 && (string)argv[1] == "-p")
     {
         cout << rpn(argv[2]) << endl;
@@ -18,25 +18,34 @@ int main(int argc, char* argv[]){
         return 0;
     }
 
+
+    if(argc >= 2 && (string)argv[1] == "test")
+    {
+        test();
+        return 0;
+    }
+
+
+
+
     //asking user for the string
     cout << "Enter an RPN Expression: ";
     string RPN;
     getline(cin, RPN);
     //getting the result from the rpn function and giving it back to user
-    int result = rpn(RPN);
+    float result = rpn(RPN);
     cout << "Answer:" << result << endl;
 
-    //test function to check a few cases
-    test();
+    
     
 
     
     return 0;
 }
 
-int rpn(string rpn){
+float rpn(string rpn){
     //creating object
-    List rpnList;
+    List<float> rpnList;
 
     //putting the rpn string into a stringstream (makes it easier to go one by one)
     stringstream rpnstream(rpn);
@@ -50,21 +59,21 @@ int rpn(string rpn){
         if(temp != "+"  && temp != "-" && temp != "*" && temp != "/"){
             //converting the string to an int (using another strigstream)
             stringstream intConversion(temp);
-            int intToPush;
-            intConversion >> intToPush; 
+            float numToPush;
+            intConversion >> numToPush; 
 
             //pushing to the list
-            rpnList.push(intToPush);
+            rpnList.push(numToPush);
         }else{
             //getting the first two nodes in the list
-            int intOne = rpnList.pop();
-            int intTwo = rpnList.pop();
+            float numOne = rpnList.pop();
+            float numTwo = rpnList.pop();
             
             //do the correct operation and push the result back to the list
-            if(temp == "*")rpnList.push(intTwo * intOne);
-            if(temp == "+")rpnList.push(intTwo + intOne);
-            if(temp == "-")rpnList.push(intTwo - intOne);
-            if(temp == "/")rpnList.push(intTwo / intOne);
+            if(temp == "*")rpnList.push(numTwo * numOne);
+            if(temp == "+")rpnList.push(numTwo + numOne);
+            if(temp == "-")rpnList.push(numTwo - numOne);
+            if(temp == "/")rpnList.push(numTwo / numOne);
 
         }
         

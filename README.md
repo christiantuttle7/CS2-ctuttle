@@ -33,7 +33,7 @@ Name: BST
 Date:12/9/2024
 Status: Done
 Self-Grade:100/100
-Notes: It works and passes all test cases
+Notes: Fixed Everything, Works Now
 
 
 
@@ -61,7 +61,7 @@ Name: RPN
 Date: 11/29/2024
 Status: Done
 Self-Grade: 100/100
-Notes: Tested a bunch of times and works good. I used a lot of the node and list code from lab3 and edited it.
+Notes: Templated everything and now works for floats and ints. also fixed the test function stuff
 
 
 Homework 4:
