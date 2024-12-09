@@ -7,8 +7,9 @@ using namespace std;
 void clearScreen();
 
 int main(){
+    clearScreen();
 
-    cout << "Your Name is Bruce Wayne, you reieve a letter from the joker saying he is holdin your butler," <<
+    cout << "Your Name is Bruce Wayne, you recieve a letter from the joker saying he is holding your butler," <<
                 " Alfred hostage and wants 42 million dollars" << endl;
 
     //creating game
@@ -73,6 +74,9 @@ int main(){
         
         //While loop that goes until the villain is dead
         while(currentVillain->getHP() >= 0 ){
+
+            cout << currentVillain->getName() << "'s HP: " << currentVillain->getHP() << endl;
+            cout << "Your HP: " << user->getHP() << endl;
             
             //villain hits user
             currentVillain->attack(user);
